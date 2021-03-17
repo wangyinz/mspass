@@ -30,10 +30,11 @@ from mspasspy.ccore.utility import (Metadata,
                                     dmatrix,
                                     ProcessingHistory)
 from mspasspy.db.schema import DatabaseSchema, MetadataSchema
+from mspasspy.util.decorators import mspass_func_wrapper_global_history
 
-
+@mspass_func_wrapper_global_history
 def read_distributed_data(client_arg, db_name, cursors, mode='promiscuous', normalize=[], load_history=True, exclude_keys=[], collection='wf',
-                          format='spark', spark_context=None, data_tag=None):
+                          format='spark', spark_context=None, data_tag=None, global_history=None):
     """
      This method takes a list of mongodb cursors as input, constructs a mspasspy object for each cursor in a distributed
      manner, and return all of the mspasspy objects using the format required by the distributed computing framework
